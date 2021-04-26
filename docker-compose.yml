@@ -1,0 +1,11 @@
+ version: '3.9'
+ services:
+  spring-boot-docker-service:
+    build: ./
+    image: spring-boot-docker-image
+    container_name: spring-boot-docker-container
+    restart: always
+    ports:
+      - 8080:8080
+    healthcheck:
+      test: "exit 0"

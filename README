@@ -1,0 +1,39 @@
+Maven build run option (without docker)
+./mvnw spring-boot:run
+
+Docker run option
+docker-compose up --build
+
+Design Choices:
+All dependencies required to run the application are contained within the pom.xml and are loaded via maven
+The application is running on top of SpringBoot 2.4.4;  
+	SpringBoot provides an embedded Tomcat Server; so need to install elsewhere.  
+
+  Frontend: There is one JSP file for the index page, and other JSP page for members;  the index page displays error/status messages on key events;  field validation not included.  
+  Backend:  RestController accepts forms data via RESTful endpoints; leveraging a service class that proxies to the persistence layer before redirecting to the appropriate view (ModelAndView return class). 
+  			The /login endpoint handles both sign up and login paths
+  				If valid credentials are provided to the /login endpoint and the user is not already in the DB, the API, auto-registers the user (for logic simplicity). Other cases behave as expected
+  Database:
+     The application makes use of an embedded in-memory H2 database instead of a standalone db install
+     The application uses JPA to define the schema and any required tables, and queries; because of this there is no need for a table create script. This deviates from exercise instructions.
+     See User class for db annotations.   
+
+ Docker: Basic configuration used, not production hardened.
+ 
+Check Health Endpoint
+curl localhost:8080/actuator/health
+
+Login Endpoint Example
+curl -i -H "Accept: application/json" \-H "Content-Type: application/json" \-X POST --data \ '{"email": "jake@array.io","password": "abc123"}' "http://localhost:8080/login"
+
+Logout Endpoint Example
+curl -i -H "Accept: application/json" \-H "Content-Type: application/json" \-X POST --data \ '{"email": "jake@array.io","password": "abc123"}' "http://localhost:8080/logout"
+
+Basic JUnit Tests are included to verify the RESTful endpoint functionality 
+Time Spent 10 hours 
+	Research  : 1 hour(s)
+	Dev Setup : 2 hour(s)
+	Coding    : 3 hour(s)
+	Debug     : 2 hour(s)
+	Docker    : 1 hour(s)
+	Testing   : 1 hour(s)
