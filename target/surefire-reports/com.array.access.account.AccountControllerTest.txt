@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.array.access.account.AccountControllerTest
--------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.545 s - in com.array.access.account.AccountControllerTest

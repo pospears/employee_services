@@ -7,14 +7,14 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.4.4</version>
-		<relativePath /> <!-- lookup parent from repository -->
+		<relativePath />
 	</parent>
-	<groupId>com.array.access.account</groupId>
-	<artifactId>exercise</artifactId>
+	<groupId>com.exlservice.search</groupId>
+	<artifactId>employeeSearch</artifactId>
 	<version>0.0.1</version>
 	<name>spring-boot</name>
 	<packaging>war</packaging>
-	<description>array.io coding exercise 1</description>
+	<description>Employee Search Coding Exercise</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -60,6 +60,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-jsr310</artifactId>
+			<version>2.12.3</version>
+		</dependency>
 		<!-- end::tests[] -->
 	</dependencies>
 
@@ -69,7 +74,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<finalName>exercise-0.0.1</finalName>
+					<finalName>employeeSearch-0.0.1</finalName>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -1,39 +1,30 @@
 Maven build run option (without docker)
-./mvnw spring-boot:run
-
-Docker run option
-docker-compose up --build
+./mvnw spring-boot:run on root folder pom.xml
 
 Design Choices:
 All dependencies required to run the application are contained within the pom.xml and are loaded via maven
 The application is running on top of SpringBoot 2.4.4;  
 	SpringBoot provides an embedded Tomcat Server; so need to install elsewhere.  
 
-  Frontend: There is one JSP file for the index page, and other JSP page for members;  the index page displays error/status messages on key events;  field validation not included.  
-  Backend:  RestController accepts forms data via RESTful endpoints; leveraging a service class that proxies to the persistence layer before redirecting to the appropriate view (ModelAndView return class). 
-  			The /login endpoint handles both sign up and login paths
-  				If valid credentials are provided to the /login endpoint and the user is not already in the DB, the API, auto-registers the user (for logic simplicity). Other cases behave as expected
+  General:  Upon startup of the application a generator will randomly create 1000 employees, for paginated display at /. You may add addition employees with the provided UI components; remove of employees are not allowed.
+  Frontend: There is only one jsp file for all view logic; the file has uses vuetify for provisioning a the ui components; the UI components consists of a date range filter field that accepts a range selection of dates, an search field, and a new button to add new employees;  field validation provided where needed included.  
+  Backend:  RestController accepts request via RESTful endpoints; leveraging a service class that proxies to a persistence layer before returning a list of available employees to the frontend. 
+  			The /search endpoint does not take any parameters and returns the employee list for pagination, The /addEmployees endpoint accepts employee information to add an new employee if they are not already in the database
   Database:
      The application makes use of an embedded in-memory H2 database instead of a standalone db install
-     The application uses JPA to define the schema and any required tables, and queries; because of this there is no need for a table create script. This deviates from exercise instructions.
-     See User class for db annotations.   
-
- Docker: Basic configuration used, not production hardened.
+     The application uses JPA to define the schema along with any required tables (as annotations), and queries; because of this there is no need for a table create script. 
+     See Employee class for db annotations.   
  
 Check Health Endpoint
-curl localhost:8080/actuator/health
-
-Login Endpoint Example
-curl -i -H "Accept: application/json" \-H "Content-Type: application/json" \-X POST --data \ '{"email": "jake@array.io","password": "abc123"}' "http://localhost:8080/login"
-
-Logout Endpoint Example
-curl -i -H "Accept: application/json" \-H "Content-Type: application/json" \-X POST --data \ '{"email": "jake@array.io","password": "abc123"}' "http://localhost:8080/logout"
+localhost:8080/actuator/health
 
 Basic JUnit Tests are included to verify the RESTful endpoint functionality 
-Time Spent 10 hours 
-	Research  : 1 hour(s)
-	Dev Setup : 2 hour(s)
-	Coding    : 3 hour(s)
-	Debug     : 2 hour(s)
-	Docker    : 1 hour(s)
-	Testing   : 1 hour(s)
+Time Spent 22.5 hours 
+	Research  : 2.0 hour(s)
+	Dev Setup : 1.0 hour(s)
+	Coding (Frontend)    : 4.5 hour(s)
+	Coding (Backend)   : 3.0 hour(s)
+	Debug (Frontend)     : 6.5 hour(s)
+	Debug (Backend)     : 2.5 hour(s)
+	Unit Testing   : 1.0 hour(s)
+	Block Box Testing   : 2.0 hour(s)
