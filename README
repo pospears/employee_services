@@ -1,10 +1,10 @@
-Maven build run option (without docker)
-./mvnw spring-boot:run on root folder pom.xml
+Maven build run option
+./mvnw spring-boot:run on root folder against pom.xml
 
 Design Choices:
 All dependencies required to run the application are contained within the pom.xml and are loaded via maven
 The application is running on top of SpringBoot 2.4.4;  
-	SpringBoot provides an embedded Tomcat Server; so need to install elsewhere.  
+	SpringBoot provides an embedded Tomcat Server; so need to install elsewhere.   VueJS and Vuetrify are used on the frontend.
 
   General:  Upon startup of the application a generator will randomly create 1000 employees, for paginated display at /. You may add addition employees with the provided UI components; remove of employees are not allowed.
   Frontend: There is only one jsp file for all view logic; the file has uses vuetify for provisioning a the ui components; the UI components consists of a date range filter field that accepts a range selection of dates, an search field, and a new button to add new employees;  field validation provided where needed included.  
